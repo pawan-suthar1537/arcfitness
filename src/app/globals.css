@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+:root {
+  --background: #090909;
+  --foreground: #f5f1ec;
+  --surface: #f4efe7;
+  --surface-strong: #ffffff;
+  --accent: #f7771f;
+  --accent-strong: #b74c09;
+  --line: rgba(255, 255, 255, 0.08);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk);
+  --font-display: var(--font-space-grotesk);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: clip;
+  background:
+    radial-gradient(circle at top left, rgba(247, 119, 31, 0.22), transparent 24%),
+    radial-gradient(circle at right top, rgba(255, 255, 255, 0.08), transparent 20%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+a,
+button,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gym-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(circle at center, black 28%, transparent 82%);
+}
+
+.gym-noise {
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 35%, rgba(255, 255, 255, 0.14) 0 1px, transparent 1px),
+    radial-gradient(circle at 45% 75%, rgba(255, 255, 255, 0.1) 0 1px, transparent 1px);
+  background-size: 180px 180px;
+}
+
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.24);
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-tag::after {
+  content: "";
+  width: 4.25rem;
+  height: 1px;
+  background: rgba(247, 119, 31, 0.45);
+}
+
+.section-tag-dark {
+  color: rgba(0, 0, 0, 0.78);
+}
+
+.section-tag-dark::after {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.vertical-word {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  line-height: 0.8;
+}
+
+.lift-card {
+  transition:
+    transform 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
+    border-color 0.45s var(--ease-out);
+}
+
+.lift-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.14);
+  border-color: rgba(247, 119, 31, 0.3);
+}
+
+.fade-slide {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: fade-slide 0.8s var(--ease-out) forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+.delay-4 {
+  animation-delay: 0.4s;
+}
+
+.delay-5 {
+  animation-delay: 0.5s;
+}
+
+.pulse-dot {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.marquee-track {
+  display: flex;
+  min-width: max-content;
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-group {
+  flex-shrink: 0;
+}
+
+@keyframes fade-slide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.82);
+    opacity: 0.55;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .gym-grid {
+    background-size: 54px 54px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-slide {
+    opacity: 1;
+    transform: none;
+  }
+}
